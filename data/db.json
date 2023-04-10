@@ -1,1 +1,16 @@
-[{"message":"2","date":1681138427},{"message":"4","date":1681138433},{"message":"5","date":1681138444},{"message":"awef","date":1681139727}]
+[
+  {
+    "message": "#in#BLUR ewfafaw fawef",
+    "date": 1681155185,
+    "profit": null,
+    "token": "BLUR",
+    "type": "in"
+  },
+  {
+    "message": "#out#BLUR#-10 wafawefw",
+    "date": 1681155192,
+    "profit": -10,
+    "token": "BLUR",
+    "type": "out"
+  }
+]

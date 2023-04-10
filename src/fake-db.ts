@@ -1,7 +1,8 @@
 import fs from 'fs';
+import {ParsedMessage} from "./parser";
 
 
-export interface ChannelMessage {
+export interface ChannelMessage extends ParsedMessage{
   message: string;
   date: number;
 }
@@ -27,13 +28,14 @@ export class FakeDb {
   }
 
   write() {
-
     fs.writeFile('data/db.json', JSON.stringify(this.messages), (err) => {
       if (err) {
         console.log('error', err)
       }
     })
   }
+
+
 
 }
 

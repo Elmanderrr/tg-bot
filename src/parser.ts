@@ -1,8 +1,21 @@
-export function parseMessage(msg: string) {
-  const parsed = msg.match(/\[.+?\]/g).map(str => str.replace(/[\[\]]/g, '')) || [];
-  console.log(parsed)
-  const [ type, token, result ] = parsed;
-  if(parsed?.length >= 2) {
-    console.log(type, token, result)
+export interface ParsedMessage {
+  type: string;
+  token: string;
+  profit: number
+}
+
+export function parseMessage(msg: string): ParsedMessage {
+  const hashed = msg.match(/^[^\s]*\s/)?.[0];
+  const split = hashed?.split('#')?.slice(1) || [];
+  const [type, token, profit] = split;
+
+  if (split?.length >= 2) {
+    return {
+      type: type.trim(),
+      token: token.trim(),
+      profit: typeof profit === 'string' ? parseFloat(profit) : null
+    }
   }
+
+  return null
 }

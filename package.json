@@ -4,17 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.ts --ignore data/db.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mtproto/core": "^6.2.0",
-    "lowdb": "^4.0.1",
+    "@types/lodash": "^4.14.192",
+    "@types/lodash-es": "^4.17.7",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "node-telegram-bot-api": "^0.61.0",
     "nodemon": "^2.0.22",
-    "telegraf": "^4.12.2",
     "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {
