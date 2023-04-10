@@ -12,40 +12,31 @@ const fakeDb = new FakeDb();
 
 
 bot.on('channel_post', (content) => {
-  // fakeDb.addMessage({
-  //   message: content.text,
-  //   date: content.date
-  // })
-  try {
-    const satisfyFormat = parseMessage(content.text);
 
-    if (satisfyFormat) {
-      fakeDb.addMessage({
-        message: content.text,
-        date: content.date,
-        profit: satisfyFormat.profit,
-        token: satisfyFormat.token,
-        type: satisfyFormat.type
-      })
-    }
-    if (content.entities?.[0].type === "bot_command" && content.text === '/report') {
-      const groupped = groupBy(fakeDb.messages, 'token');
-      const message = Object.entries(groupped).map(([token, data]) => {
-        const out = data.find(m => m.type === 'out');
-        console.log(data)
-        return `${token} : ${out.profit}%`
-      });
+  const satisfyFormat = parseMessage(content.text);
 
-      if (message?.length) {
-        const total = 'Total: ' + fakeDb.messages.map(v => v.profit).reduce((a, b) => a + b) + ' %';
-        bot.sendMessage(content.chat.id, [...message, total].join('\n'));
-
-      }
-    }
-  } catch (e) {
-    console.log(e)
+  if (satisfyFormat) {
+    fakeDb.addMessage({
+      message: content.text,
+      date: content.date,
+      profit: satisfyFormat.profit,
+      token: satisfyFormat.token,
+      type: satisfyFormat.type
+    })
   }
-  
+  if (content.entities?.[0].type === "bot_command" && content.text === '/report') {
+    const groupped = groupBy(fakeDb.messages, 'token');
+    const message = Object.entries(groupped).map(([token, data]) => {
+      const out = data.find(m => m.type === 'out');
+      return `${token} : ${out.profit}%`
+    });
+
+    if (message?.length) {
+      const total = 'Total: ' + fakeDb.messages.map(v => v.profit).reduce((a, b) => a + b) + ' %';
+      bot.sendMessage(content.chat.id, [...message, total].join('\n'));
+
+    }
+  }
 
 });
 
